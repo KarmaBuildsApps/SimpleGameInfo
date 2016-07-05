@@ -10,11 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import myapp.tae.ac.uk.simplegameinfo.CacheManager.FileMetaInfo;
 import myapp.tae.ac.uk.simplegameinfo.Constants.Constants;
 import myapp.tae.ac.uk.simplegameinfo.DI.components.APIComponent;
 import myapp.tae.ac.uk.simplegameinfo.Interfaces.GameView;
@@ -22,6 +25,7 @@ import myapp.tae.ac.uk.simplegameinfo.Model.Data;
 import myapp.tae.ac.uk.simplegameinfo.Controller.GameController;
 import myapp.tae.ac.uk.simplegameinfo.UI.GameDetailActivity;
 import myapp.tae.ac.uk.simplegameinfo.UI.adapter.GameListAdapter;
+import myapp.tae.ac.uk.simplegameinfo.Util.FileUtil;
 import myapp.tae.ac.uk.simplegameinfo.Util.RxUtils;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements GameView {
         adapter = new GameListAdapter(this);
         rcGameList.setAdapter(adapter);
         controller.getGameData();
+        File f = getCacheDir();
+        LinkedList<FileMetaInfo> sortedCache = FileUtil.processAndManageRootDir(f, 1024*10);
     }
 
     public void showDetailActivity(Data gameData) {
