@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SimpleGameInfo</string>
+    <string name="data_fetch_error">There is error in fetch game data</string>
+</resources>
